@@ -1,0 +1,26 @@
+# OS X Files
+*.DS_STORE
+
+# Xcode Noise
+*~.nib
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.xcworkspace
+*.xcuserdata
+xcuserdata/
+build/
+
+# Ignore most things in the folder,
+# including downloaded tutorials
+openGL*/
+ogldev-source/
+CurlNoise/
+glfw-3.1.1/
+include/
+
+# Pick and choose what to include
+!openGLOscilColor*/
+!openGLTrnsfrmFdbckPartSimp*/

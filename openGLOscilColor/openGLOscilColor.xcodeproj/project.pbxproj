@@ -1,0 +1,281 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		38237C351B0A89A200C2E931 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38237C341B0A89A200C2E931 /* main.cpp */; };
+		3875DC711B0BABA90069F6BA /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3875DC6F1B0BAAC40069F6BA /* libglfw3.3.1.dylib */; };
+		3875DC731B0BBF6A0069F6BA /* libGLEW.1.12.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3875DC721B0BBF6A0069F6BA /* libGLEW.1.12.0.dylib */; };
+		38FA51631B0B9B3B0043574F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FA51621B0B9B3B0043574F /* OpenGL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		38237C2F1B0A89A200C2E931 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		38237C311B0A89A200C2E931 /* openGLOscilColor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGLOscilColor; sourceTree = BUILT_PRODUCTS_DIR; };
+		38237C341B0A89A200C2E931 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3875DC6F1B0BAAC40069F6BA /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = ../../../../../usr/local/Cellar/glfw3/3.1.1/lib/libglfw3.3.1.dylib; sourceTree = "<group>"; };
+		3875DC721B0BBF6A0069F6BA /* libGLEW.1.12.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.12.0.dylib; path = ../../../../../usr/local/Cellar/glew/1.12.0/lib/libGLEW.1.12.0.dylib; sourceTree = "<group>"; };
+		38FA51621B0B9B3B0043574F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38237C2E1B0A89A200C2E931 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3875DC731B0BBF6A0069F6BA /* libGLEW.1.12.0.dylib in Frameworks */,
+				3875DC711B0BABA90069F6BA /* libglfw3.3.1.dylib in Frameworks */,
+				38FA51631B0B9B3B0043574F /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		38237C281B0A89A200C2E931 = {
+			isa = PBXGroup;
+			children = (
+				3875DC721B0BBF6A0069F6BA /* libGLEW.1.12.0.dylib */,
+				3875DC6F1B0BAAC40069F6BA /* libglfw3.3.1.dylib */,
+				38FA51621B0B9B3B0043574F /* OpenGL.framework */,
+				38237C331B0A89A200C2E931 /* openGLSetup */,
+				38237C321B0A89A200C2E931 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		38237C321B0A89A200C2E931 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38237C311B0A89A200C2E931 /* openGLOscilColor */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		38237C331B0A89A200C2E931 /* openGLSetup */ = {
+			isa = PBXGroup;
+			children = (
+				38237C341B0A89A200C2E931 /* main.cpp */,
+			);
+			path = openGLSetup;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		38237C301B0A89A200C2E931 /* openGLOscilColor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38237C381B0A89A200C2E931 /* Build configuration list for PBXNativeTarget "openGLOscilColor" */;
+			buildPhases = (
+				38237C2D1B0A89A200C2E931 /* Sources */,
+				38237C2E1B0A89A200C2E931 /* Frameworks */,
+				38237C2F1B0A89A200C2E931 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = openGLOscilColor;
+			productName = openGLSetup;
+			productReference = 38237C311B0A89A200C2E931 /* openGLOscilColor */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		38237C291B0A89A200C2E931 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Jennifer;
+				TargetAttributes = {
+					38237C301B0A89A200C2E931 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 38237C2C1B0A89A200C2E931 /* Build configuration list for PBXProject "openGLOscilColor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 38237C281B0A89A200C2E931;
+			productRefGroup = 38237C321B0A89A200C2E931 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				38237C301B0A89A200C2E931 /* openGLOscilColor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38237C2D1B0A89A200C2E931 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38237C351B0A89A200C2E931 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		38237C361B0A89A200C2E931 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LD_DYLIB_INSTALL_NAME = "-framework OpenGL -GLFWDLL";
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		38237C371B0A89A200C2E931 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LD_DYLIB_INSTALL_NAME = "-framework OpenGL -GLFWDLL";
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		38237C391B0A89A200C2E931 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD_DYLIB_INSTALL_NAME = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw3/3.1.1/lib,
+					/usr/local/Cellar/glew/1.12.0/lib,
+				);
+				PRODUCT_NAME = openGLOscilColor;
+			};
+			name = Debug;
+		};
+		38237C3A1B0A89A200C2E931 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD_DYLIB_INSTALL_NAME = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw3/3.1.1/lib,
+					/usr/local/Cellar/glew/1.12.0/lib,
+				);
+				PRODUCT_NAME = openGLOscilColor;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38237C2C1B0A89A200C2E931 /* Build configuration list for PBXProject "openGLOscilColor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38237C361B0A89A200C2E931 /* Debug */,
+				38237C371B0A89A200C2E931 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38237C381B0A89A200C2E931 /* Build configuration list for PBXNativeTarget "openGLOscilColor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38237C391B0A89A200C2E931 /* Debug */,
+				38237C3A1B0A89A200C2E931 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 38237C291B0A89A200C2E931 /* Project object */;
+}
