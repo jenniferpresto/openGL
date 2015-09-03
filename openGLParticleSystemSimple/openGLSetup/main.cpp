@@ -41,9 +41,11 @@ const char * vertexSrc = GLSL(
                               
                               in vec2 inPos;
                               in vec2 inVel;
+                              in vec3 inCol;
                               
                               out vec2 outPos;
                               out vec2 outVel;
+                              out vec3 outCol;
                             
                               // generate a pseudo random direction based on particle's current position
                               // http://byteblacksmith.com/improvements-to-the-canonical-one-liner-glsl-rand-for-opengl-es-2-0/
@@ -129,17 +131,18 @@ const char * vertexSrc = GLSL(
                                       outVel = getDir(newFloat);
                                       outVel *= newSpeed;
                                       outPos = mousePos;
-                                      //outPos += outVel;
                                   }
                                   
+                                  outCol = inCol;
                                   gl_Position = vec4(outPos, 0.0, 1.0);
                               }
                               );
 
 const char * fragmentSrc = GLSL(
+                                in vec3 outCol;
                                 out vec4 outColor;
                                 void main() {
-                                    outColor = vec4(1.0, 0.0, 0.0, 1.0);
+                                    outColor = vec4(outCol.r, outCol.g, outCol.b, 1.0);
                                 }
                                 );
 
@@ -163,21 +166,6 @@ GLuint createShader(GLenum type, const GLchar* src) {
     
     return shader;
 };
-
-float randomOne(glm::vec2 co)
-{
-    return glm::fract(sin(dot(co, glm::vec2(12.9898,78.233))) * 43758.5453);
-};
-
-float randomTwo(glm::vec2 co)
-{
-    float a = 12.9898f;
-    float b = 78.233f;
-    float c = 43758.5453f;
-    float dt= dot(co, glm::vec2(a,b));
-    float sn= glm::mod(dt, 3.14f);
-    return glm::fract(sin(sn) * c);
-}
 
 glm::vec2 normalizeMousePos(float x, float y)
 {
@@ -247,8 +235,8 @@ int main(int argc, const char * argv[]) {
     glBindVertexArray(vao);
     
     //  array of values
-    const int particleCount = 50000;
-    GLfloat positionData[particleCount * 4]; // two slots for position, two for velocity
+    const int particleCount = 10000;
+    GLfloat positionData[particleCount * 7]; // two slots for position, two for velocity, three for color
     
     //  generate random values
     unsigned int time_ui = (unsigned int)( time(NULL) );
@@ -268,25 +256,23 @@ int main(int argc, const char * argv[]) {
         float randNum3 = (float)(rand()) / (float)(RAND_MAX);
         randNum3 *= M_PI * 2.0f;
         
-//        positionData[(i*4) + 0] = randNum;            // pos.x
-//        positionData[(i*4) + 1] = randNum2;           // pos.y
+        positionData[(i*7) + 0] = randNum;              // pos.x
+        positionData[(i*7) + 1] = randNum2;             // pos.y
 
-        positionData[(i*4) + 0] = 0.0f;                 // pos.x
-        positionData[(i*4) + 1] = 0.0f;                 // pos.y
-
-        positionData[(i*4) + 2] = cos(randNum3) * 0.03; // vel.x
-        positionData[(i*4) + 3] = sin(randNum3) * 0.03; // vel.y
+        positionData[(i*7) + 2] = cos(randNum3) * 0.03; // vel.x
+        positionData[(i*7) + 3] = sin(randNum3) * 0.03; // vel.y
+        
+        positionData[(i*7) + 4] = (float)(rand()) / (float)(RAND_MAX);  // col.r
+        positionData[(i*7) + 5] = (float)(rand()) / (float)(RAND_MAX);  // col.g
+        positionData[(i*7) + 6] = (float)(rand()) / (float)(RAND_MAX);  // col.b
+        
+//        std::cout << "Particle " << i << std::endl;
+//        std::cout << "    Pos: (" << positionData[(i*7) + 0] << ", " << positionData[(i*7) + 1] << ")" << std::endl;
+//        std::cout << "    Vel: (" << positionData[(i*7) + 2] << ", " << positionData[(i*7) + 3] << ")" << std::endl;
+//        std::cout << "    Col: (" << positionData[(i*7) + 4] << ", " << positionData[(i*7) + 5] << ", " << positionData[(i*7) + 6] << ")" << std::endl;
     }
-    
-    std::cout << "Checking array" << std::endl;
-    
-//    for (int i = 0; i < particleCount; i++) {
-//        std::cout << "    particle [" << i << "]" << std::endl;
-//        std:: cout << "      pos.x: " << positionData[(i*4) + 0] << std::endl;
-//        std:: cout << "      pos.y: " << positionData[(i*4) + 1] << std::endl;
-//        std:: cout << "      vel.x: " << positionData[(i*4) + 2] << std::endl;
-//        std:: cout << "      vel.y: " << positionData[(i*4) + 3] << std::endl;
-//    }
+
+    std::cout << "Sizeof positionData: " << sizeof(positionData) << std::endl;
     
     //  create two buffers to ping-pong back and forth with position data
     GLuint positionBufferA, positionBufferB;
@@ -308,8 +294,8 @@ int main(int argc, const char * argv[]) {
     glAttachShader(program, fragmentShader);
     
     // before linking program, specify which output attributes we want to capture into a buffer
-    const GLchar * feedbackVaryings[] = {"outPos", "outVel"};
-    glTransformFeedbackVaryings(program, 2, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
+    const GLchar * feedbackVaryings[] = {"outPos", "outVel", "outCol"};
+    glTransformFeedbackVaryings(program, 3, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
     
     glBindFragDataLocation(program, 0, "outColor");
     // now link and activate the program
@@ -318,23 +304,12 @@ int main(int argc, const char * argv[]) {
     
     GLint posAttrib = glGetAttribLocation(program, "inPos");
     GLint velAttrib = glGetAttribLocation(program, "inVel");
+    GLint colAttrib = glGetAttribLocation(program, "inCol");
     GLint mousePosUniform = glGetUniformLocation(program, "mousePos");
     
     std::cout << "posAttrib: " << posAttrib << std::endl;
     std::cout << "velAttrib: " << velAttrib << std::endl;
-    
-    glm::vec2 testVector = glm::vec2(-0.4f, -0.5f);
-    
-    std::cout << "Main function: test randomness: " << std::endl;
-    for (int i = 0; i < 10; i++) {
-        std::cout << "Vector: " << testVector.x << ", " << testVector.y << std::endl;
-        float resultOne = randomOne(testVector);
-        float resultTwo = randomTwo(testVector);
-        std::cout << "    randOne: " << resultOne << std::endl;
-        std::cout << "    randTwo: " << resultTwo << std::endl;
-        testVector.x += 0.01;
-    }
-    
+    std::cout << "colAttrib: " << colAttrib << std::endl;
     
     while (!glfwWindowShouldClose(window)) {
         
@@ -351,13 +326,16 @@ int main(int argc, const char * argv[]) {
         //  disable the rasterizer
         glEnable(GL_RASTERIZER_DISCARD);
         
-        //  specify the souce buffer
+        //  specify the source buffer
         glBindBuffer(GL_ARRAY_BUFFER, positionBufferA);
         glEnableVertexAttribArray(posAttrib);
-        glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+        glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), 0);
 
         glEnableVertexAttribArray(velAttrib);
-        glVertexAttribPointer(velAttrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+        glVertexAttribPointer(velAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+        
+        glEnableVertexAttribArray(colAttrib);
+        glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(4 * sizeof(float)));
 
         
         //  specify target buffer
@@ -368,6 +346,7 @@ int main(int argc, const char * argv[]) {
         glEndTransformFeedback();
         glDisableVertexAttribArray(posAttrib);
         glDisableVertexAttribArray(velAttrib);
+        glDisableVertexAttribArray(colAttrib);
         
         glFlush();
 
@@ -388,13 +367,17 @@ int main(int argc, const char * argv[]) {
         
         glBindBuffer(GL_ARRAY_BUFFER, positionBufferA);
         glEnableVertexAttribArray(posAttrib);
-        glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+        glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), 0);
         glEnableVertexAttribArray(velAttrib);
-        glVertexAttribPointer(velAttrib, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+        glVertexAttribPointer(velAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+        glEnableVertexAttribArray(colAttrib);
+        glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(4 * sizeof(float)));
+        
 
         glDrawArrays(GL_POINTS, 0, particleCount);
         glDisableVertexAttribArray(posAttrib);
         glDisableVertexAttribArray(velAttrib);
+        glDisableVertexAttribArray(colAttrib);
         
         //std::cout << "mouse position: " << "(" << mouseX << ", " << mouseY << ")" << std::endl;
         
